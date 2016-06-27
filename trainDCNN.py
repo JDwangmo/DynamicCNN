@@ -41,7 +41,6 @@ if len(hyperparas['filter_size_conv_layers'])!= 2 or len(hyperparas['nr_of_filte
 # LOAD  TRAINING DATA #
 #######################
 print('Loading the training data')
-
 # load data, taken from Kalchbrenner matlab files
 # we order the input according to length and pad all sentences until the maximum length
 # at training time however, we will use the "length" array to shrink that matrix following the largest sentence within a batch

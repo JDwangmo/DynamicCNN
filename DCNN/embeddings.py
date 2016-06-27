@@ -1,3 +1,4 @@
+#encoding=utf8
 __author__ = 'Frederic Godin  (frederic.godin@ugent.be / www.fredericgodin.com)'
 
 
@@ -7,7 +8,11 @@ from lasagne import init
 from lasagne.layers import EmbeddingLayer
 
 class SentenceEmbeddingLayer(EmbeddingLayer):
-
+    '''
+        跟原始EmbeddingLayer的差别在于
+            1. 交换了输出的最后两维
+            2. 在最后一行增加了多一行,这一行全0,为了消除前面补长的差异
+    '''
     def __init__(self, incoming, vocab_size, embedding_size,
                  W=init.Normal(), padding='no', **kwargs):
         super(SentenceEmbeddingLayer, self).__init__(incoming, input_size=vocab_size, output_size=embedding_size,

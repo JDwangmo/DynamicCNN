@@ -2,7 +2,7 @@ __author__ = 'Frederic Godin  (frederic.godin@ugent.be / www.fredericgodin.com)'
 
 import theano.tensor as T
 from lasagne.layers.base import Layer
-
+import lasagne
 
 class KMaxPoolLayer(Layer):
 
@@ -53,4 +53,10 @@ class DynamicKMaxPoolLayer(KMaxPoolLayer):
 
         return self.kmaxpooling(input,k)
 
+
+if __name__ == '__main__':
+    l_in = lasagne.layers.InputLayer((50,1,40,36))
+    l_kmax = KMaxPoolLayer(l_in,5)
+    print lasagne.layers.get_output(l_kmax)
+    from theano import function
 
