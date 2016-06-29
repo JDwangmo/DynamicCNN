@@ -86,7 +86,9 @@ l2_layers = []
 for layer in lasagne.layers.get_all_layers(output_layer):
     if isinstance(layer,(DCNN.embeddings.SentenceEmbeddingLayer,DCNN.convolutions.Conv1DLayerSplitted,lasagne.layers.DenseLayer)):
         l2_layers.append(layer)
-loss_train = lasagne.objectives.aggregate(lasagne.objectives.categorical_crossentropy(lasagne.layers.get_output(output_layer,X_batch),y_batch),mode='mean')+lasagne.regularization.regularize_layer_params_weighted(dict(zip(l2_layers,hyperparas["L2"])),lasagne.regularization.l2)
+loss_train = lasagne.objectives.aggregate(
+    lasagne.objectives.categorical_crossentropy(lasagne.layers.get_output(output_layer,X_batch),y_batch),mode='mean')\
+             +lasagne.regularization.regularize_layer_params_weighted(dict(zip(l2_layers,hyperparas["L2"])),lasagne.regularization.l2)
 
 # validating/testing
 loss_eval = lasagne.objectives.categorical_crossentropy(lasagne.layers.get_output(output_layer,X_batch,deterministic=True),y_batch)
